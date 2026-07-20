@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tim Pong — Motion Graphic Designer / AICG Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#101218;
+    --surface:#191c24;
+    --surface-2:#20232c;
+    --line: rgba(237,238,240,0.10);
+    --text:#EDEEF0;
+    --muted:#8B92A0;
+    --tally:#FF5A36;
+    --signal:#3EDCA0;
+    --gold:#E8B84B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.55;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--tally); color:#101218; }
+  h1,h2,h3{ font-family:'Space Grotesk', sans-serif; letter-spacing:-0.01em; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  a{ color:inherit; }
+  img{ display:block; max-width:100%; }
+  .wrap{ max-width:1140px; margin:0 auto; padding:0 28px; }
+
+  /* ---------- Ticker bar ---------- */
+  .ticker{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink);
+    border-bottom:1px solid var(--line);
+    padding:10px 0;
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  .ticker-inner{
+    display:inline-flex; align-items:center; gap:40px;
+    animation: scroll 26s linear infinite;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.06em;
+    color:var(--muted);
+    text-transform:uppercase;
+  }
+  .ticker-inner span{ display:inline-flex; align-items:center; gap:10px; }
+  .rec-dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--tally);
+    box-shadow:0 0 0 0 rgba(255,90,54,0.5);
+    animation:pulse 1.6s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(255,90,54,0.55); }
+    70%{ box-shadow:0 0 0 7px rgba(255,90,54,0); }
+    100%{ box-shadow:0 0 0 0 rgba(255,90,54,0); }
+  }
+  @keyframes scroll{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-inner{ animation:none; }
+    .rec-dot{ animation:none; }
+  }
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    position:relative;
+    padding:130px 0 100px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute; inset:0; z-index:0;
+    background-image:
+      linear-gradient(180deg, rgba(16,18,24,0.55) 0%, rgba(16,18,24,0.88) 55%, var(--ink) 100%),
+      url('https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?auto=format&fit=crop&w=1800&q=70');
+    background-size:cover;
+    background-position:center;
+    filter:saturate(0.85);
+  }
+  header.hero .wrap{ position:relative; z-index:1; }
+  .slate-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px; color:var(--tally);
+    letter-spacing:0.12em; text-transform:uppercase;
+    margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .slate-label::before{ content:"●"; font-size:10px; }
+  h1.title{
+    font-size:clamp(38px, 6vw, 74px);
+    font-weight:700;
+    line-height:1.02;
+    margin-bottom:18px;
+    text-shadow:0 2px 30px rgba(0,0,0,0.4);
+  }
+  h1.title .accent{ color:var(--tally); }
+  .subtitle{
+    font-size:18px; color:var(--muted); max-width:640px;
+    margin-bottom:34px;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:14px 30px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px; color:var(--muted);
+  }
+  .hero-meta a:hover{ color:var(--tally); }
+  .hero-meta span{ color:var(--text); }
+
+  /* ---------- Section shell ---------- */
+  section{ padding:80px 0; border-bottom:1px solid var(--line); }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--tally); margin-bottom:14px;
+  }
+  h2.section-title{ font-size:clamp(26px,3.4vw,38px); margin-bottom:36px; max-width:760px; }
+
+  /* ---------- Capability grid ---------- */
+  .cap-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:1px; background:var(--line); border:1px solid var(--line);
+  }
+  .cap-card{ background:var(--surface); padding:26px 22px; }
+  .cap-card .n{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted); }
+  .cap-card h3{ font-size:17px; margin:8px 0 6px; font-weight:600; }
+  .cap-card p{ font-size:14px; color:var(--muted); }
+
+  /* ---------- Reel ---------- */
+  .reel-frame{
+    aspect-ratio:16/9; width:100%; border-radius:2px;
+    background:var(--surface); border:1px solid var(--line);
+    overflow:hidden;
+  }
+  .reel-frame iframe{ width:100%; height:100%; border:0; }
+  .reel-links{ margin-top:16px; display:flex; gap:24px; flex-wrap:wrap;
+    font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--muted); }
+  .reel-links a{ text-decoration:underline; text-underline-offset:4px; }
+  .reel-links a:hover{ color:var(--tally); }
+
+  /* ---------- Highlights section (top of page) ---------- */
+  .highlights{
+    background:linear-gradient(180deg, rgba(62,220,160,0.05), transparent 45%);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .highlights .ai-tag{
+    display:inline-block; font-family:'JetBrains Mono', monospace; font-size:11px;
+    color:var(--signal); border:1px solid rgba(62,220,160,0.4);
+    padding:3px 9px; border-radius:20px; margin-bottom:14px;
+  }
+  .highlights .eyebrow{ color:var(--signal); }
+  .fill{ color:var(--gold); font-style:italic; }
+
+  /* Category block with banner image */
+  .cat-block{ margin-bottom:64px; }
+  .cat-block:last-child{ margin-bottom:0; }
+  .cat-banner{
+    position:relative; border:1px solid var(--line); overflow:hidden;
+    margin-bottom:22px; min-height:150px;
+    display:flex; align-items:flex-end;
+  }
+  .cat-banner img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    filter:saturate(0.7) brightness(0.55);
+  }
+  .cat-banner-overlay{
+    position:relative; z-index:1; padding:22px 26px;
+    background:linear-gradient(180deg, transparent, rgba(16,18,24,0.85) 70%);
+    width:100%;
+    display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  }
+  .cat-banner h3.cat-title{ font-size:24px; color:#fff; }
+  .cat-count{ font-family:'JetBrains Mono', monospace; font-size:12px; color:rgba(237,238,240,0.75); }
+
+  .video-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px; }
+  .video-card{
+    background:var(--surface); border:1px solid var(--line);
+    display:flex; flex-direction:column;
+    transition:border-color .2s ease;
+    overflow:hidden;
+  }
+  .video-card:hover{ border-color:rgba(255,90,54,0.5); }
+  .video-embed{ aspect-ratio:16/9; width:100%; background:#000; }
+  .video-embed iframe{ width:100%; height:100%; border:0; }
+  .video-card-body{ padding:16px 18px; }
+  .video-card .filename{
+    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--muted);
+    word-break:break-word; margin-bottom:6px;
+  }
+  .video-card h4{ font-size:15.5px; font-weight:600; line-height:1.3; }
+
+  /* ---------- Selected Work (case studies) ---------- */
+  .work-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:22px; }
+  .work-card{
+    background:var(--surface); border:1px solid var(--line); padding:26px;
+    transition:border-color .2s ease;
+  }
+  .work-card:hover{ border-color:rgba(255,90,54,0.5); }
+  .work-card .tag{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; }
+  .work-card h3{ font-size:19px; margin:10px 0 8px; }
+  .work-card p{ font-size:14px; color:var(--muted); margin-bottom:14px; }
+
+  /* ---------- Timeline ---------- */
+  .timeline{ position:relative; padding-left:26px; }
+  .timeline::before{
+    content:""; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--line);
+  }
+  .t-item{ position:relative; padding-bottom:36px; }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-item::before{
+    content:""; position:absolute; left:-26px; top:5px; width:9px; height:9px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--tally);
+  }
+  .t-year{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--tally); margin-bottom:4px; }
+  .t-item h3{ font-size:18px; margin-bottom:4px; }
+  .t-item .role{ font-size:13px; color:var(--muted); margin-bottom:8px; }
+  .t-item p.desc{ font-size:14px; color:var(--muted); max-width:640px; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{ display:flex; flex-wrap:wrap; gap:40px; justify-content:space-between; align-items:flex-end; }
+  .contact-links{ display:flex; flex-direction:column; gap:10px; font-size:15px; }
+  .contact-links a{ text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px; }
+  .contact-links a:hover{ border-color:var(--tally); color:var(--tally); }
+  footer{ padding:34px 0; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted); }
+
+  @media (max-width:640px){
+    header.hero{ padding:100px 0 70px; }
+    section{ padding:56px 0; }
+    .cat-banner{ min-height:110px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span><span class="rec-dot"></span> ON AIR</span>
+    <span>TIM PONG</span>
+    <span>MOTION GRAPHIC DESIGNER</span>
+    <span>AICG ARTIST</span>
+    <span>11+ YRS BROADCAST &amp; BRAND CONTENT</span>
+    <span><span class="rec-dot"></span> ON AIR</span>
+    <span>TIM PONG</span>
+    <span>MOTION GRAPHIC DESIGNER</span>
+    <span>AICG ARTIST</span>
+    <span>11+ YRS BROADCAST &amp; BRAND CONTENT</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <div class="slate-label">TAKE 01 · HONG KONG</div>
+    <h1 class="title">Tim Pong<br><span class="accent">Visual Storytelling,</span> broadcast to brand.</h1>
+    <p class="subtitle">Motion Graphic Designer / AICG Artist — 11+ years turning broadcast technology, live production and generative AI into content for TVB, AIA and Hong Kong's biggest outdoor screens.</p>
+    <div class="hero-meta">
+      <a href="mailto:pongfw@gmail.com">pongfw@gmail.com</a>
+      <a href="https://www.linkedin.com/in/timpong288" target="_blank">LinkedIn ↗</a>
+      <span>Hong Kong SAR</span>
+      <span class="fill">[電話號碼]</span>
+    </div>
+  </div>
+</header>
+
+<section class="highlights">
+  <div class="wrap">
+    <div class="ai-tag">2025–2026 · TVB</div>
+    <div class="eyebrow">Selected Work — Past Year Highlights</div>
+    <h2 class="section-title">Four focus areas: CGAI, Motion Banner, TVC Creation &amp; Execution, Social Media</h2>
+
+    <div class="cat-block">
+      <div class="cat-banner">
+        <img src="https://images.unsplash.com/photo-1727434032765-9c4df88b6e02?auto=format&fit=crop&w=1400&q=70" alt="">
+        <div class="cat-banner-overlay">
+          <h3 class="cat-title">01 · CGAI</h3>
+          <span class="cat-count">Generative AI production for TVC &amp; brand content</span>
+        </div>
+      </div>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/13SEQKQwndvQO7QE7ZCiCA_zoi7nGuM3x/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">恆香月餅AI Chi-lam edit02</div>
+            <h4>Hang Heung Mooncake — AI-Generated TVC</h4>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1mKLEnB_XzJhhVM6c_ZzmbAwPd4AuTRuo/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">正官庄_AI TVC 15s</div>
+            <h4>Jung Kwan Jang — AI TVC, 15s</h4>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1ygG425dZnijfgw6aFcN7hSkrjuxEoF7S/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">AI Gentle Monster Crepe 01</div>
+            <h4>Gentle Monster Crepe — AI-Generated Content</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-block">
+      <div class="cat-banner">
+        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1400&q=70" alt="">
+        <div class="cat-banner-overlay">
+          <h3 class="cat-title">02 · Motion Banner</h3>
+          <span class="cat-count">Digital &amp; social motion banners</span>
+        </div>
+      </div>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1IRFqFFSdQo-4NPs1Wxm8pjvDjE_Tq-wc/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">G-Niib_心安睛</div>
+            <h4>G-Niib — Eye Care, Motion Banner</h4>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1ytCEn7mknmibq7nBM0_baYXqOU49Z0MW/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">G-Niib_敏感痕掛角_10s</div>
+            <h4>G-Niib — Sensitive Itch Relief, 10s</h4>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1RE9p3xi4ZIOttv7hyr4xrkFlfIktMkrw/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">G-Niib_微生態M3護腸配方 10s</div>
+            <h4>G-Niib — M3 Gut Microbiome Formula, 10s</h4>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1dWL52r3uEqZlNQll38NdjrS8wDLMKFyc/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">X Wallet呈獻：臥底嬌娃 30s</div>
+            <h4>X Wallet Presents: Undercover Belle, 30s</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-block">
+      <div class="cat-banner">
+        <img src="https://images.unsplash.com/photo-1558905933-7adbea5ddea7?auto=format&fit=crop&w=1400&q=70" alt="">
+        <div class="cat-banner-overlay">
+          <h3 class="cat-title">03 · TVC Creation and Execution</h3>
+          <span class="cat-count">End-to-end TVC production</span>
+        </div>
+      </div>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1ajk4Pkw4f4nM2lVphyGdgR4aF0HRZ7wo/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">KHFC_HK_30s</div>
+            <h4>KHFC Hong Kong — TVC, 30s</h4>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1YqW0QYgkX7BqXJzB5x6xkFTI0DKmo0vv/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">Choi Fung男士麝香沐浴露(男友香) AI TVC</div>
+            <h4>Choi Fung Men's Musk Body Wash (Boyfriend Scent) — AI TVC</h4>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1akntLN8AW5uVQmY96KLLgy31iD-KCt6z/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">【美康】德國施巴水份面霜_AI TVC 10s</div>
+            <h4>Meikang x Sebamed Germany Moisture Cream — AI TVC, 10s</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-block">
+      <div class="cat-banner">
+        <img src="https://images.unsplash.com/photo-1533497197926-c9e810dcea9a?auto=format&fit=crop&w=1400&q=70" alt="">
+        <div class="cat-banner-overlay">
+          <h3 class="cat-title">04 · Social Media</h3>
+          <span class="cat-count">Social-first content &amp; posts</span>
+        </div>
+      </div>
+      <div class="video-grid">
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1AVKCPEViqc0i6kwHC4b_HNkOid8GMbbe/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">ChiLamPost</div>
+            <h4>Chi Lam — Social Post</h4>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1M4NDY2FMuWhCn4HxmpirRmetopI_86c-/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">ChiLamPostV</div>
+            <h4>Chi Lam — Social Post (Video)</h4>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1SRlseX4APllvekJgkkKDTKRKw8Q3xUQr/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-card-body">
+            <div class="filename">魔音女團Social</div>
+            <h4>Mo Yam Girl Group — Social Content</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="eyebrow">Capabilities</div>
+  <h2 class="section-title">From live broadcast rigs to generative pipelines</h2>
+  <div class="cap-grid">
+    <div class="cap-card"><div class="n">01</div><h3>Motion Graphics &amp; VFX</h3><p>2D/3D animation, compositing, broadcast graphics</p></div>
+    <div class="cap-card"><div class="n">02</div><h3>Generative AI Content</h3><p>AI-driven ad &amp; social production at scale</p></div>
+    <div class="cap-card"><div class="n">03</div><h3>Live &amp; XR Production</h3><p>Real-time rendering, camera tracking, XR LED walls</p></div>
+    <div class="cap-card"><div class="n">04</div><h3>Brand &amp; Executive Content</h3><p>AGMs, results announcements, leadership comms</p></div>
+    <div class="cap-card"><div class="n">05</div><h3>Outdoor &amp; Spatial Media</h3><p>Naked-eye 3D, hologram, anamorphic LED art</p></div>
+    <div class="cap-card"><div class="n">06</div><h3>Adobe Creative Suite</h3><p>After Effects · Photoshop · Illustrator · Premiere</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="eyebrow">Showreel</div>
+  <h2 class="section-title">Watch the reel</h2>
+  <div class="reel-frame">
+    <iframe src="https://www.youtube.com/embed/wti3CdukhWE" title="Tim Pong Showreel" allowfullscreen></iframe>
+  </div>
+  <div class="reel-links">
+    <a href="https://youtu.be/wti3CdukhWE" target="_blank">主Showreel ↗</a>
+    <a href="https://www.youtube.com/watch?v=cqn5TZyPnP0" target="_blank">More video ↗</a>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="eyebrow">Selected Work</div>
+  <h2 class="section-title">Broadcast, brand &amp; spatial media</h2>
+  <div class="work-grid">
+    <div class="work-card">
+      <div class="tag">AIA · 2022–2025</div>
+      <h3>Results Announcement &amp; Executive Content</h3>
+      <p>Video content for AGMs, results announcements and leadership conferences across social, internal and outdoor LED platforms.</p>
+    </div>
+    <div class="work-card">
+      <div class="tag">O Plus Media · 2021</div>
+      <h3>SOGO Causeway Bay — Naked-Eye 3D LED</h3>
+      <p>Simulation of water and whale for outdoor anamorphic LED art — idea to final output, one-stop delivery.</p>
+    </div>
+    <div class="work-card">
+      <div class="tag">O Plus Media · 2021</div>
+      <h3>LOHAS Mall Hologram Ad</h3>
+      <p>Outdoor animation series combined with holographic projection technology.</p>
+    </div>
+    <div class="work-card">
+      <div class="tag">O Plus Media · 2020</div>
+      <h3>Anson Lo "King Kong" MV</h3>
+      <p>Real-time 3D rendered broadcast scenes, produced with Phoenix Satellite TV's latest broadcast software.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="eyebrow">Career</div>
+  <h2 class="section-title">Timeline</h2>
+  <div class="timeline">
+    <div class="t-item">
+      <div class="t-year">2025 — PRESENT</div>
+      <h3>Visual Producer</h3>
+      <div class="role">TVB (Television Broadcasts Limited)</div>
+      <p class="desc">CGAI, motion banner, TVC creation and execution, and social media content — see Selected Work above.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-year">2022 — 2025</div>
+      <h3>Motion Graphic Designer</h3>
+      <div class="role">AIA Group (via Connected Group Ltd.)</div>
+      <p class="desc">Internal &amp; external advertisements, animations, virtual backgrounds and worldwide video content for social media, internal platforms and outdoor LED walls.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-year">2022</div>
+      <h3>Production Manager</h3>
+      <div class="role">O Plus Media Technology Ltd.</div>
+      <p class="desc">Led production at scale across broadcast solutions, motion capture, camera tracking and XR LED walls.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-year">2020 — 2022</div>
+      <h3>Graphic Designer</h3>
+      <div class="role">O Plus Media Technology Ltd.</div>
+      <p class="desc">Real-time rendering broadcast systems; collaborated with Phoenix Satellite TV and produced Anson Lo's "King Kong" MV; naked-eye 3D outdoor animation at SOGO HK.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-year">2012 — 2018</div>
+      <h3>Motion Graphic Designer</h3>
+      <div class="role">Video-Film Productions Ltd.</div>
+      <p class="desc">TVC, posters, bus &amp; tram ads, billboards, DVDs, props and websites.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="eyebrow">Contact</div>
+  <h2 class="section-title">Let's talk</h2>
+  <div class="contact-grid">
+    <div class="contact-links">
+      <a href="mailto:pongfw@gmail.com">pongfw@gmail.com</a>
+      <a href="https://www.linkedin.com/in/timpong288" target="_blank">linkedin.com/in/timpong288</a>
+      <span class="mono" style="color:var(--muted); font-size:13px;">Hong Kong SAR</span>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  © 2026 Tim Pong (Fatwa Pong) · Motion Graphic Designer / AICG Artist
+</footer>
+
+</body>
+</html>
