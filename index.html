@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tim Pong — Motion Graphic Designer / AICG Artist</title>
+<title>Tim Pong — Multimedia Designer / AICG Artist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -196,24 +196,19 @@
     overflow:hidden;
   }
   .video-card:hover{ border-color:rgba(255,90,54,0.5); }
-  
-  /* --- FIX: 隱藏 Google Drive 預設頂部控制條 --- */
-  .video-embed{ 
-    aspect-ratio:16/9; 
-    width:100%; 
-    background:#000; 
-    position:relative; 
-    overflow:hidden; /* 裁切超出容器範圍的 UI */
+  .video-embed{ aspect-ratio:16/9; width:100%; background:#000; position:relative; cursor:pointer; overflow:hidden; }
+  .video-embed iframe{ width:100%; height:100%; border:0; }
+  .video-poster{ width:100%; height:100%; object-fit:cover; display:block; filter:brightness(0.75); transition:filter .2s ease; }
+  .video-embed:hover .video-poster{ filter:brightness(0.9); }
+  .play-btn{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:56px; height:56px; border-radius:50%;
+    background:rgba(16,18,24,0.72); border:1px solid rgba(237,238,240,0.35);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:18px; padding-left:4px;
+    transition:background .2s ease, transform .2s ease;
   }
-  .video-embed iframe{ 
-    position:absolute; 
-    top:-50px; /* 將控制條往上推移出畫面 */
-    left:0; 
-    width:100%; 
-    height:calc(100% + 50px); /* 彌補推移的垂直高度 */
-    border:0; 
-  }
-  
+  .video-embed:hover .play-btn{ background:var(--tally); transform:translate(-50%,-50%) scale(1.08); }
   .video-card-body{ padding:16px 18px; }
   .video-card .filename{
     font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--muted);
@@ -268,12 +263,12 @@
   <div class="ticker-inner">
     <span><span class="rec-dot"></span> ON AIR</span>
     <span>TIM PONG</span>
-    <span>MOTION GRAPHIC DESIGNER</span>
+    <span>MULTIMEDIA DESIGNER</span>
     <span>AICG ARTIST</span>
     <span>13+ YRS BROADCAST &amp; BRAND CONTENT</span>
     <span><span class="rec-dot"></span> ON AIR</span>
     <span>TIM PONG</span>
-    <span>MOTION GRAPHIC DESIGNER</span>
+    <span>MULTIMEDIA DESIGNER</span>
     <span>AICG ARTIST</span>
     <span>13+ YRS BROADCAST &amp; BRAND CONTENT</span>
   </div>
@@ -298,34 +293,34 @@
   <div class="wrap">
     <div class="ai-tag">2025–2026 · TVB</div>
     <div class="eyebrow">Selected Work — Past Year Highlights</div>
-    <h2 class="section-title">Four focus areas: AICG, Motion Banner, TVC Creation &amp; Execution, Social Media</h2>
+    <h2 class="section-title">Four focus areas: CGAI, Motion Banner, TVC Creation &amp; Execution, Social Media</h2>
     <p class="contribution-note">For the majority of the works featured below, I held significant, hands-on involvement and contribution across artwork production, creative concept development, creative direction, and final execution — from initial idea to delivered output.</p>
 
     <div class="cat-block">
       <div class="cat-banner">
         <img src="https://images.unsplash.com/photo-1727434032765-9c4df88b6e02?auto=format&fit=crop&w=1400&q=70" alt="">
         <div class="cat-banner-overlay">
-          <h3 class="cat-title">01 · AICG</h3>
+          <h3 class="cat-title">01 · CGAI</h3>
           <span class="cat-count">Generative AI production for TVC &amp; brand content</span>
         </div>
       </div>
       <div class="video-grid">
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/13SEQKQwndvQO7QE7ZCiCA_zoi7nGuM3x/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/13SEQKQwndvQO7QE7ZCiCA_zoi7nGuM3x/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=13SEQKQwndvQO7QE7ZCiCA_zoi7nGuM3x&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">恆香月餅AI Chi-lam edit02</div>
             <h4>Hang Heung Mooncake — AI-Generated TVC</h4>
           </div>
         </div>
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1mKLEnB_XzJhhVM6c_ZzmbAwPd4AuTRuo/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1mKLEnB_XzJhhVM6c_ZzmbAwPd4AuTRuo/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1mKLEnB_XzJhhVM6c_ZzmbAwPd4AuTRuo&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">正官庄_AI TVC 15s</div>
             <h4>Jung Kwan Jang — AI TVC, 15s</h4>
           </div>
         </div>
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1ygG425dZnijfgw6aFcN7hSkrjuxEoF7S/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1ygG425dZnijfgw6aFcN7hSkrjuxEoF7S/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1ygG425dZnijfgw6aFcN7hSkrjuxEoF7S&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">AI Gentle Monster Crepe 01</div>
             <h4>Gentle Monster Crepe — AI-Generated Content</h4>
@@ -344,28 +339,28 @@
       </div>
       <div class="video-grid">
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1IRFqFFSdQo-4NPs1Wxm8pjvDjE_Tq-wc/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1IRFqFFSdQo-4NPs1Wxm8pjvDjE_Tq-wc/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1IRFqFFSdQo-4NPs1Wxm8pjvDjE_Tq-wc&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">G-Niib_心安睛</div>
             <h4>G-Niib — Eye Care, Motion Banner</h4>
           </div>
         </div>
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1ytCEn7mknmibq7nBM0_baYXqOU49Z0MW/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1ytCEn7mknmibq7nBM0_baYXqOU49Z0MW/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1ytCEn7mknmibq7nBM0_baYXqOU49Z0MW&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">G-Niib_敏感痕掛角_10s</div>
             <h4>G-Niib — Sensitive Itch Relief, 10s</h4>
           </div>
         </div>
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1RE9p3xi4ZIOttv7hyr4xrkFlfIktMkrw/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1RE9p3xi4ZIOttv7hyr4xrkFlfIktMkrw/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1RE9p3xi4ZIOttv7hyr4xrkFlfIktMkrw&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">G-Niib_微生態M3護腸配方 10s</div>
             <h4>G-Niib — M3 Gut Microbiome Formula, 10s</h4>
           </div>
         </div>
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1dWL52r3uEqZlNQll38NdjrS8wDLMKFyc/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1dWL52r3uEqZlNQll38NdjrS8wDLMKFyc/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1dWL52r3uEqZlNQll38NdjrS8wDLMKFyc&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">X Wallet呈獻：臥底嬌娃 30s</div>
             <h4>X Wallet Presents: Undercover Belle, 30s</h4>
@@ -384,21 +379,21 @@
       </div>
       <div class="video-grid">
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1ajk4Pkw4f4nM2lVphyGdgR4aF0HRZ7wo/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1ajk4Pkw4f4nM2lVphyGdgR4aF0HRZ7wo/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1ajk4Pkw4f4nM2lVphyGdgR4aF0HRZ7wo&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">KHFC_HK_30s</div>
             <h4>KHFC Hong Kong — TVC, 30s</h4>
           </div>
         </div>
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1YqW0QYgkX7BqXJzB5x6xkFTI0DKmo0vv/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1YqW0QYgkX7BqXJzB5x6xkFTI0DKmo0vv/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1YqW0QYgkX7BqXJzB5x6xkFTI0DKmo0vv&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">Choi Fung男士麝香沐浴露(男友香) AI TVC</div>
             <h4>Choi Fung Men's Musk Body Wash (Boyfriend Scent) — AI TVC</h4>
           </div>
         </div>
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1akntLN8AW5uVQmY96KLLgy31iD-KCt6z/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1akntLN8AW5uVQmY96KLLgy31iD-KCt6z/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1akntLN8AW5uVQmY96KLLgy31iD-KCt6z&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">【美康】德國施巴水份面霜_AI TVC 10s</div>
             <h4>Meikang x Sebamed Germany Moisture Cream — AI TVC, 10s</h4>
@@ -417,21 +412,21 @@
       </div>
       <div class="video-grid">
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1AVKCPEViqc0i6kwHC4b_HNkOid8GMbbe/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1AVKCPEViqc0i6kwHC4b_HNkOid8GMbbe/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1AVKCPEViqc0i6kwHC4b_HNkOid8GMbbe&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">ChiLamPost</div>
             <h4>Chi Lam — Social Post</h4>
           </div>
         </div>
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1M4NDY2FMuWhCn4HxmpirRmetopI_86c-/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1M4NDY2FMuWhCn4HxmpirRmetopI_86c-/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1M4NDY2FMuWhCn4HxmpirRmetopI_86c-&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">ChiLamPostV</div>
             <h4>Chi Lam — Social Post (Video)</h4>
           </div>
         </div>
         <div class="video-card">
-          <div class="video-embed"><iframe src="https://drive.google.com/file/d/1SRlseX4APllvekJgkkKDTKRKw8Q3xUQr/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <div class="video-embed" data-embed="https://drive.google.com/file/d/1SRlseX4APllvekJgkkKDTKRKw8Q3xUQr/preview" onclick="playEmbed(this)"><img class="video-poster" src="https://drive.google.com/thumbnail?id=1SRlseX4APllvekJgkkKDTKRKw8Q3xUQr&sz=w1000" alt="" loading="lazy"><div class="play-btn">&#9654;</div></div>
           <div class="video-card-body">
             <div class="filename">魔音女團Social</div>
             <h4>Mo Yam Girl Group — Social Content</h4>
@@ -545,8 +540,17 @@
 </section>
 
 <footer class="wrap">
-  © 2026 Tim Pong (Fatwa Pong) · Motion Graphic Designer / AICG Artist
+  © 2026 Tim Pong (Fatwa Pong) · Multimedia Designer / AICG Artist
 </footer>
+
+<script>
+function playEmbed(el){
+  var src = el.getAttribute('data-embed');
+  el.innerHTML = '<iframe src="' + src + '" allow="autoplay" allowfullscreen loading="lazy"></iframe>';
+  el.style.cursor = 'default';
+  el.onclick = null;
+}
+</script>
 
 </body>
 </html>
